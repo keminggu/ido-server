@@ -6,18 +6,24 @@ const MAX_LOGIN_ATTEMPTS = 5;
 const LOCK_TIME = 2 * 60 * 60 * 1000;
 
 var UserSchema   = new mongoose.Schema({
-    phoneNumber: { type: String, 
+    //电话
+    phoneNumber: { 
+        type: String, 
         required: true, 
         index: {
             unique: true 
         }
     },
+    //密码
     password: { 
         type: String, 
         required: true
     },
+    //名称
     name: String,
+    //邮箱
     email: String,
+    //头像
     headSrc: String,
     // 0: nomal user
     // 1: verified user
@@ -28,7 +34,7 @@ var UserSchema   = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    //login fail number
+    //登录失败次数
     loginAttempts: { 
         type: Number, 
         required: true, 
@@ -47,9 +53,8 @@ var UserSchema   = new mongoose.Schema({
     },
     status: {
         type: Number,
-        default: 0,
+        default: 1,
     }
-    
 });
 
 UserSchema.virtual('isLocked').get(function() {

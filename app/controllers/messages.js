@@ -1,12 +1,10 @@
 var express  = require('express');
-var express  = require('express');
 var router 	 = express.Router();
 
-var config   = require("./../config");
 var Message     = require('./../models/message');
-var tokenManager = require('./../models/token-manager');
+var tokenManager = require('./../models/except/token-manager');
 
-var logger = require("./../logHelper").helper; 
+var logger = require("./../../logHelper").helper; 
 
 router.post('/publish',function(req, res, next){
 	var uId = req.body.uId || '';

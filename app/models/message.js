@@ -2,9 +2,33 @@ var mongoose    = require('mongoose');
 var Schema = mongoose.Schema;
 
 var MessageSchema   = new Schema({
-	uId: { type: Schema.Types.ObjectId, ref: 'User'},  //外键
-    title: { type: String, required: true},
-    address: { type: String, required: true},
+	//发布者
+	user: { 
+		type: Schema.Types.ObjectId, 
+		ref: 'User'
+	},
+	//主题
+    topic: { 
+    	type: String, 
+    	required: true
+    },
+    //内容
+    content: {
+    	type: String, 
+    	required: true
+    },
+    //任务时间
+    time: {
+    	type: Date,
+    	default: Date.now() 
+    },
+    //联系人（电话）
+    contact: Number,
+    //地点
+    address: { 
+    	type: String, 
+    	required: true
+    },
     location: {
     	type: {
 	      type: String,
@@ -14,10 +38,19 @@ var MessageSchema   = new Schema({
 	    },
     	coordinates: [Number],
     },
-    content: { type: String, required: true},
-    create_at : {type : Date, default: Date.now()},
-    //0: 删除  1:xxx
-    status: {type:Number, required: true, default: 1}
+  
+    createAt: {
+        type: Date,
+        default: Date.now()
+    },
+    updateAt: {
+        type: Date,
+        default: Date.now()
+    },
+    status: {
+        type: Number,
+        default: 1,
+    }
 });
 
 //对坐标建索引

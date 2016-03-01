@@ -1,6 +1,6 @@
 var redis 		= require('redis');
-var config 		= require('./../config');
-var redisClient = redis.createClient(config.redis_db,{});
+var allConfig = require('../../../config/env/all');
+var redisClient = redis.createClient(allConfig.redis_db,{});
 
 redisClient.on('error', function (err) {
     console.error('Error ' + err);

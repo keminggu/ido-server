@@ -1,6 +1,6 @@
 var jwt      	= require('jwt-simple');
 var moment 		= require("moment");
-var config   	= require('./../config');
+var config   	= require('../../../config/env/all.js');
 var redisClient = require('./redis-db').redisClient;
 
 //get the request token
@@ -79,7 +79,7 @@ exports.expireToken = function(req) {
 };
 
 // Middleware for token verification
-exports.verifyToken = function (req, res, next) {
+exports.signinRequired = function (req, res, next) {
     var token = getToken(req);
     console.log("token =====" + token);
     //no authorization

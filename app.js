@@ -6,10 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-
 var allConfig = require('./config/env/all');
-//load models
+
+//connect mongo and load models
 require('./app/models/except/load-models');
+//connect redis
+require('./app/models/except/redis-db');
 //routes config
 require('./config/routes')(app);
 

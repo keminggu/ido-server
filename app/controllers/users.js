@@ -1,11 +1,10 @@
 var express  = require('express');
 var router 	 = express.Router();
 
-var config   = require("./../config");
 var User     = require('./../models/user');
-var tokenManager = require('./../models/token-manager');
+var tokenManager = require('./../models/except/token-manager');
 
-var logger = require("./../logHelper").helper;  
+var logger = require("./../../logHelper").helper;  
 //注册
 router.post('/signup', function(req, res, next) {
 	var phoneNumber = req.body.phoneNumber || '';
@@ -119,7 +118,7 @@ router.post('/signin', function(req, res, next) {
 });
 
 //test
-router.get('/me', [tokenManager.verifyToken], function(req, res, next) {
+router.get('/me', tokenManager.signinRequired, function(req, res, next) {
 	res.sendStatus(200);
 });
 
